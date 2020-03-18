@@ -1,0 +1,33 @@
+Screens
+-login
+-world map
+    -home / can have multiple 
+    -shop (hatchery) for purchasing/getting pets
+    -shop (items) for general store
+    -live market place (socket.io)
+    -adventure worlds (pending)
+
+
+schema of user
+    -login id (pull from auth0)
+    -pets{
+        name_of_pet: pet._id
+    }
+    -userLvl
+    -CASH MONEY~~~~~~
+
+schema of pet
+    -happiness
+    -hunger
+    -strength
+    -intelligence
+    -dex
+    -lvl(experience)
+
+features for each Screen
+    -home 
+        -play
+        -feed 
+        -exercise
+        -clean poop
+    
