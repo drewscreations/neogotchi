@@ -1,5 +1,5 @@
 import React from 'react';
-import NavBar from './components/NavBar';
+// import NavBar from './components/NavBar';
 import { useAuth0 } from './react-auth0-spa';
 import { Router } from '@reach/router';
 import './App.css';
@@ -22,9 +22,9 @@ function App() {
   return (
     <div className="App">
       <div className="App-header">
-          {/* <NavBar path='/'/> */} 
           {/* add id to paths after building and testing is complete */}
         <Router>
+          {/* <NavBar path='/'/>  */}
           <Login path='/neogotchi/login'/>
           <World path='/neogotchi/world' />
           <Home path='/neogotchi/home'/>
