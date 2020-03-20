@@ -43,5 +43,12 @@ module.exports = {
         NeoGotchi.deleteOne({_id:request.params.id})
             .then(deleteConfirmation => response.status(200).json(deleteConfirmation))
             .catch(err => response.status(400).json(err));
-    }
+    },
+    //owned: all the NeoGotchi's owned by the user
+    ownedNeoGotchi : async (req, res) => {
+        const { id } = req.params; //user's ID
+        const user = await User.findById(id).populate('neoGotchi')
+            .catch(err => response.status(404).json(err));
+        res.send(user.neoGotchi);
+     }
 }
