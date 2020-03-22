@@ -1,14 +1,15 @@
-const MoveBox  = (entities, { input })=>{
+const MoveUser  = (entities, { input })=>{
     const {payload:mouseMove} = input.find(x=>x.name === 'onMouseMove') || {};
     const {payload:drag} = input.find(x=>x.name === 'onDrag') || {};
     const {payload:mouseDown} = input.find(x=>x.name === 'onMouseDown') || {};
+    const {payload:mouseOut} = input.find(x=>x.name === 'onMouseOut') || {};
 
-    if (mouseMove){
+    if (mouseMove&&!mouseOut){
         // console.log(input)
         const {user} = entities;
-        // console.log(entities)
-        user.x = mouseMove.pageX;
-        user.y = mouseMove.pageY;
+        // console.log(mouseMove.view) want to know how to stop following mouse if outside parent div
+        user.position.x += Math.abs(mouseMove.pageX-user.position.x)>100?(mouseMove.pageX-user.position.x)*.01:0;
+        user.position.y += Math.abs(mouseMove.pageY-user.position.y)>100?(mouseMove.pageY-user.position.y)*.01:0;
 
     }
     if(drag){
@@ -22,4 +23,4 @@ const MoveBox  = (entities, { input })=>{
     }
     return entities
 }
-export default MoveBox
+export default MoveUser
