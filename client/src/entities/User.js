@@ -8,8 +8,10 @@ const User = (props) =>{
       const size=100;
       const {body, target, name, sprite} = props
 
-      const x = body.position.x - size/2;
-      const y = body.position.y - size/2;
+      const x = body.position.x;
+      const y = body.position.y
+      // const x = body.position.x - size/2;
+      // const y = body.position.y - size/2;
       
       //ill move the import up one level to whatever view its in, then pass the imported pics as prop in the prop.sprite
       const BackgroundUrl = `url(${userImg})`;

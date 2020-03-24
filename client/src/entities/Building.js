@@ -11,10 +11,13 @@ const Building = (props) =>{
       const {body, name, sprite} = props
       const position = body.position;
       const size = Math.sqrt(body.area)
-      let x, y;
+
+
       const divHolder = useRef(null)
-      x = position.x;
-      y = position.y;
+      const x = position.x
+      const y = position.y
+      // const x = position.x-size/2;
+      // const y = position.y-size/2;
       //ill move the import up one level to whatever view its in, then pass the imported pics as prop in the prop.sprite
       const BackgroundUrl = `url(${name==="shop"?Store:name==="house"?House:name==="hatchery"?Hatchery:null})`;
       let divStyle={ position: "absolute", width: size, height: size, backgroundImage:BackgroundUrl, backgroundSize:size, left: x, top: y }
