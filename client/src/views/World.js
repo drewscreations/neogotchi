@@ -66,7 +66,8 @@ export default function MyWorld() {
     //     });
   
     //   World.add(engine.world, mouseConstraint);
-        return {
+        return {//order goes lowest -> highest in render priority
+            background:{body:ground, size: [2000,2000], color:'white', renderer: <Box/>},
             physics: { engine: engine, world: engine.world },
             // house: { body: house, size: [50, 50], color: 'red', renderer: <Box/>},
             house: { body: house, name:'house', sprite:'house.png', renderer: <Building />},
@@ -76,7 +77,9 @@ export default function MyWorld() {
             wallLeft:{ body: wallLeft, size: [60, 800], color: 'pink', renderer: <Box/>},
             wallRight:{ body: wallRight, size: [60, 800], color: 'red', renderer: <Box/>},
             ceiling:{ body: ceiling, size: [800, 60], color: 'brown', renderer: <Box/>},
-            user: {body: user, target:{x:400,y:0}, name:'user', sprite:'user.png', renderer: <User />}
+            dialogueBox:{},
+            user: {body: user, target:{x:400,y:0}, name:'user', sprite:'user.png', renderer: <User />},
+            
         }
     }
     const matterEntities = setupWorld();
@@ -94,7 +97,7 @@ export default function MyWorld() {
                     // shop: { position:{...namedBuildings.shop}, name:'shop', sprite:'store.png', renderer: <Building />},
                     // hatchery: { position:{...namedBuildings.hatchery}, name:'hatchery', sprite:'hatchery.png', renderer: <Building />},
                     // user: { position:{x:400,y:350}, target:{x:200,y:0}, name:'user', sprite:'user.png', renderer: <User />},
-                    dialogueBox:{},
+                    
                     ...matterEntities
                 }}>
             </GameEngine>
