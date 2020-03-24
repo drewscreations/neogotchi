@@ -2,7 +2,7 @@ import React from 'react'
 import {GameEngine} from 'react-game-engine';
 import HatcheryInside from '../static/img/hatchery_inside.png'
 import Egg from '../entities/Egg';
-import {navigate} from '@reach/router'
+import HomeBtn from '../components/HomeBtn';
 
 // import MoveUser from '../systems/userController'
 export default function hatchery() {
@@ -11,7 +11,7 @@ export default function hatchery() {
     return (
         <div>
             <h1>hatchery</h1>
-            <button onClick={()=>navigate('/neogotchi/world')}>back to world</button>
+            <HomeBtn/>
             <GameEngine
                 style={{ width: 1000, height: 600, backgroundImage:BackgroundUrl, backgroundSize:"100%"}}
                 // systems={[MoveUser]}

@@ -1,8 +1,8 @@
 import React from 'react'
 import {GameEngine} from 'react-game-engine';
+import HomeBtn from '../components/HomeBtn';
 import HomeInside from '../static/img/house_inside.png'
 import User from '../entities/User';
-import {navigate} from '@reach/router'
 
 import MoveUser from '../systems/userSystem'
 export default function home() {
@@ -10,7 +10,7 @@ export default function home() {
     return (
         <div>
             <h1>Home</h1>
-            <button onClick={()=>navigate('/neogotchi/world')}>back to world</button>
+            <HomeBtn/>
             <GameEngine
                 style={{ width: 1000, height: 600, backgroundImage:BackgroundUrl, backgroundSize:"100%"}}
                 // systems={[MoveUser]}
