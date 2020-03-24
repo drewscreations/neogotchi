@@ -4,7 +4,7 @@ import HomeInside from '../static/img/house_inside.png'
 import User from '../entities/User';
 import {navigate} from '@reach/router'
 
-import MoveUser from '../systems/system'
+import MoveUser from '../systems/userSystem'
 export default function home() {
     const BackgroundUrl = `url(${HomeInside})`;
     return (

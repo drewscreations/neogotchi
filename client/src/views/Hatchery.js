@@ -4,7 +4,7 @@ import HatcheryInside from '../static/img/hatchery_inside.png'
 import Egg from '../entities/Egg';
 import {navigate} from '@reach/router'
 
-import MoveUser from '../systems/system'
+// import MoveUser from '../systems/userController'
 export default function hatchery() {
     const BackgroundUrl = `url(${HatcheryInside})`;
     

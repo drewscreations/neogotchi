@@ -6,19 +6,28 @@ const User = (props) =>{
       //if main, props.position.main = "house, store, etc., otherwise, props.position(x, y)"
 
       const size=100;
-      const {position, name, sprite} = props
+      const {body, target, name, sprite} = props
 
-      const x = position.x - size/2;
-      const y = position.y - size/2;
+      const x = body.position.x - size/2;
+      const y = body.position.y - size/2;
       
       //ill move the import up one level to whatever view its in, then pass the imported pics as prop in the prop.sprite
       const BackgroundUrl = `url(${userImg})`;
-
+      const userStyle = {
+            position: "absolute",
+            width: size,
+            height: size,
+            backgroundImage:BackgroundUrl,
+            backgroundSize:size,
+            left: x,
+            top: y,
+            transform: `rotate(${props.body.angle*57.3}deg)`
+      }
       return (
 
-            <div style={{ position: "absolute", width: size, height: size, backgroundImage:BackgroundUrl, backgroundSize:size, left: x, top: y }}>
+            <div style={userStyle}>
             {/* <img src={Store} alt={"logo"}/> */}
-            <div style={{color:'black'}}>{props.name}</div>
+            <div style={{color:'black'}}>{name}</div>
             </div>
 
       );
