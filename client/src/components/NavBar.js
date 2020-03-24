@@ -2,7 +2,7 @@
 
 import React from "react";
 import { useAuth0 } from "../react-auth0-spa";
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 const NavBar = () => {
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
@@ -17,14 +17,14 @@ return (
     
     {isAuthenticated && (
         <span>
-            <Link to='/'>Home</Link>&nbsp;
-            <Link to='/profile'>Profile</Link>
-            <Link to='/neogotchi/world'>World</Link>
-            <Link to='/neogotchi/home'>Home</Link>
-            <Link to='/neogotchi/hatchery'>Hatchery</Link>
-            <Link to='/neogotchi/market'>Market</Link>
-            <Link to='/neogotchi/generalstore'>General Store</Link>
-            <Link to='/neogotchi/wildarea'>Wild Area</Link>
+            {/* Navbar links for testing */}
+            <NavLink to='/neogotchi/home'>Home</NavLink>&nbsp;
+            <NavLink to='/profile'>Profile</NavLink>&nbsp;
+            <NavLink to='/neogotchi/world'>World</NavLink>&nbsp;
+            <NavLink to='/neogotchi/hatchery'>Hatchery</NavLink>&nbsp;
+            <NavLink to='/neogotchi/market'>Market</NavLink>&nbsp;
+            <NavLink to='/neogotchi/generalstore'>General Store</NavLink>&nbsp;
+            <NavLink to='/neogotchi/wildarea'>Wild Area</NavLink>&nbsp;
         </span>
     )}
     </div>

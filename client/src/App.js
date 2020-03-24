@@ -1,34 +1,31 @@
 import React from 'react';
 import NavBar from './components/NavBar';
 import { useAuth0 } from './react-auth0-spa';
-// import { Router } from '@reach/router';
-import {Router, Route, Switch} from 'react-router-dom';
+import { Router, Route, Switch } from 'react-router-dom';
 import Profile from './components/Profile';
 import history from './utils/history';
 import PrivateRoute from './components/PrivateRoute';
 
 import './App.css';
-import Login from './views/Login';
 import World from './views/World';
 import Home from './views/Home';
 import Hatchery from './views/Hatchery';
 import Market from './views/Market';
 import GeneralStore from './views/GeneralStore';
 import WildArea from './views/WildArea';
-import hatchery from './views/Hatchery';
 
 
 function App() {
-  const { loading } = useAuth0();
+  // const { loading } = useAuth0();
 
-  // if (loading){
-  //   return <div>Loading...</div>;
-  // } <--testing do not remove!--
+  // // if (loading){
+  // //   return <div>Loading...</div>;
+  // // } <--testing do not remove!--
 
   return (
     <div className="App">
       <div className="App-header">
-          {/* add id to paths after building and testing is complete */}
+          {/* Protected routes in private routes for logged in user only! */}
           <Router history={history}>
             <header>
               <NavBar/>
