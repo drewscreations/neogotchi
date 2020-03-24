@@ -1,7 +1,12 @@
 import React from 'react';
-// import NavBar from './components/NavBar';
+import NavBar from './components/NavBar';
 import { useAuth0 } from './react-auth0-spa';
-import { Router } from '@reach/router';
+// import { Router } from '@reach/router';
+import {Router, Route, Switch} from 'react-router-dom';
+import Profile from './components/Profile';
+import history from './utils/history';
+import PrivateRoute from './components/PrivateRoute';
+
 import './App.css';
 import Login from './views/Login';
 import World from './views/World';
@@ -10,6 +15,7 @@ import Hatchery from './views/Hatchery';
 import Market from './views/Market';
 import GeneralStore from './views/GeneralStore';
 import WildArea from './views/WildArea';
+import hatchery from './views/Hatchery';
 
 
 function App() {
@@ -23,16 +29,26 @@ function App() {
     <div className="App">
       <div className="App-header">
           {/* add id to paths after building and testing is complete */}
-        <Router>
-          {/* <NavBar path='/'/>  */}
+          <Router history={history}>
+            <header>
+              <NavBar/>
+            </header>
+            <Switch>
+              <Route path='/' exact />
+              <PrivateRoute path='/profile' component={Profile} />
+              <PrivateRoute path='/neogotchi/world' component={World}/>
+              <PrivateRoute path='/neogotchi/home' component={Home}/>
+              <PrivateRoute path='/neogotchi/hatchery' component={Hatchery}/>
+              <PrivateRoute path='/neogotchi/market' component={Market}/>
+              <PrivateRoute path='/neogotchi/generalstore' component={GeneralStore}/>
+              <PrivateRoute path='/neogotchi/wildarea' component={WildArea}/>
+            </Switch>
+          </Router>
+
+        {/* <Router>
           <Login path='/neogotchi/login'/>
-          <World path='/neogotchi/world' />
-          <Home path='/neogotchi/home'/>
-          <Hatchery path='/neogotchi/hatchery'/>
-          <Market path='/neogotchi/market'/>
-          <GeneralStore path='/neogotchi/generalstore'/>
-          <WildArea path='/neogotchi/wildarea'/>
-        </Router>
+
+        </Router> */}
       </div>
     </div>
   );

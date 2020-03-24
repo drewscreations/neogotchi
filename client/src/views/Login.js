@@ -1,11 +1,9 @@
-import React from 'react';
-import Login from '../components/NavBar';
+import React from 'react'
 
 export default function login() {
     return (
         <div>
             <h1>Login</h1>
-            <Login/>
         </div>
     )
 }
