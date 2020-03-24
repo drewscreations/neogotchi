@@ -13,10 +13,10 @@ export default function home() {
             <button onClick={()=>navigate('/neogotchi/world')}>back to world</button>
             <GameEngine
                 style={{ width: 1000, height: 600, backgroundImage:BackgroundUrl, backgroundSize:"100%"}}
-                systems={[MoveUser]}
+                // systems={[MoveUser]}
                 entities={
                 {
-                    user: { position:{x:100,y:100}, name:'user', sprite:'user.png', renderer: <User />},
+                    // user: { position:{x:100,y:100}, name:'user', sprite:'user.png', renderer: <User />},
                 }}>
             </GameEngine>
         </div>
