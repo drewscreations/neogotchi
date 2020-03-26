@@ -1,6 +1,7 @@
 import React from 'react';
 import { useAuth0 } from '../react-auth0-spa';
 import { Redirect } from 'react-router-dom';
+import WorldBackground from '../static/img/worldView.png'
 
 export default () => {
     const { loading, isAuthenticated } = useAuth0();
@@ -11,8 +12,8 @@ export default () => {
 
     return (
         <div>
-            <h1>Login, some art that can be displayed in the login?</h1>
-            <img src='https://i.ytimg.com/vi/fiu1qbH37yw/maxresdefault.jpg' alt='placeholder'/>
+            <h1>Welcome to NeoGotchi, please login or redister!</h1>
+            <img src={WorldBackground} width='800px' height='600px' alt='placeholder'/>
         </div>
     )
 }
