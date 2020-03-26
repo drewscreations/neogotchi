@@ -13,7 +13,7 @@ import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({
     root: {
-    flexGrow: 1,
+        flexGrow: 1,
     },
     menuButton: {
     marginRight: theme.spacing(2),
@@ -41,7 +41,7 @@ export default () => {
 
 return (
     <div className={classes.root}>
-        <AppBar position="static">
+        <AppBar position="static" style={{background:'#836379'}}>
             <Toolbar>
             <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
             aria-controls="simple-menu" aria-haspopup="true" onClick={clickHandler}
@@ -62,13 +62,25 @@ return (
                         open={Boolean(anchor)}
                         onClose={closeHandler}
                     >
-                        <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/neogotchi/home'>Home</NavLink></MenuItem>
+                        <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/home'>
+                            <MenuItem onClick={closeHandler}>Home</MenuItem>
+                        </NavLink>
                         {/* <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/profile'>Profile</NavLink></MenuItem> */}
-                        <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/neogotchi/world'>World</NavLink></MenuItem>
-                        <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/neogotchi/hatchery'>Hatchery</NavLink></MenuItem>
-                        <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/neogotchi/market'>Market</NavLink></MenuItem>
-                        <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/neogotchi/generalstore'>General Store</NavLink></MenuItem>
-                        <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/neogotchi/wildarea'>Wild Area</NavLink></MenuItem>
+                        <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/world'>
+                            <MenuItem onClick={closeHandler}>World</MenuItem>
+                        </NavLink>
+                        <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/hatchery'>
+                            <MenuItem onClick={closeHandler}>Hatchery</MenuItem>
+                        </NavLink>
+                        <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/market'>
+                            <MenuItem onClick={closeHandler}>Market</MenuItem>
+                        </NavLink>
+                        <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/generalstore'>
+                            <MenuItem onClick={closeHandler}>General Store</MenuItem>
+                        </NavLink>
+                        <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/wildarea'>
+                            <MenuItem onClick={closeHandler}>Wild Area</MenuItem>
+                        </NavLink>
                     </Menu>
                     <Button  color='inherit' onClick={() => logout()}>Log out</Button>
                 </span>

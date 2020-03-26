@@ -10,8 +10,6 @@ export default function hatchery() {
     
     return (
         <div>
-            <h1>hatchery</h1>
-            <HomeBtn/>
             <GameEngine
                 style={{ width: 1000, height: 600, backgroundImage:BackgroundUrl, backgroundSize:"100%"}}
                 // systems={[MoveUser]}

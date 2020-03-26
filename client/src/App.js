@@ -7,6 +7,7 @@ import history from './utils/history';
 import PrivateRoute from './components/PrivateRoute';
 
 import './App.css';
+import Login from './views/Login';
 import World from './views/World';
 import Home from './views/Home';
 import Hatchery from './views/Hatchery';
@@ -16,36 +17,26 @@ import WildArea from './views/WildArea';
 
 
 function App() {
-  // const { loading } = useAuth0();
-
-  // // if (loading){
-  // //   return <div>Loading...</div>;
-  // // } <--testing do not remove!--
 
   return (
     <div className="App">
       <div>
-          {/* Protected routes in private routes for logged in user only! */}
+          {/* Private routes are protected for for logged in user only! */}
           <Router history={history}>
             <header>
               <NavBar/>
             </header>
             <Switch>
-              <Route path='/' exact />
-              <PrivateRoute path='/profile' component={Profile} />
-              <PrivateRoute path='/neogotchi/world' component={World}/>
-              <PrivateRoute path='/neogotchi/home' component={Home}/>
-              <PrivateRoute path='/neogotchi/hatchery' component={Hatchery}/>
-              <PrivateRoute path='/neogotchi/market' component={Market}/>
-              <PrivateRoute path='/neogotchi/generalstore' component={GeneralStore}/>
-              {/* <PrivateRoute path='/neogotchi/wildarea' component={WildArea}/> */}
+              <Route path='/' exact component={Login}/>
+              <PrivateRoute path='/profile' exact component={Profile} />
+              <PrivateRoute path='/neogotchi/world' exact component={World}/>
+              <PrivateRoute path='/neogotchi/home' exact component={Home}/>
+              <PrivateRoute path='/neogotchi/hatchery' exact component={Hatchery}/>
+              <PrivateRoute path='/neogotchi/market' exact component={Market}/>
+              <PrivateRoute path='/neogotchi/generalstore' exact component={GeneralStore}/>
+              <PrivateRoute path='/neogotchi/wildarea' exact component={WildArea}/>
             </Switch>
           </Router>
-
-        {/* <Router>
-          <Login path='/neogotchi/login'/>
-
-        </Router> */}
       </div>
     </div>
   );
