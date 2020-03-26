@@ -13,6 +13,7 @@ const Egg = (props) =>{
       
       //ill move the import up one level to whatever view its in, then pass the imported pics as prop in the prop.sprite
       const BackgroundUrl = `url(${userImg})`;
+      // console.log('making egg')
 
       return (
 

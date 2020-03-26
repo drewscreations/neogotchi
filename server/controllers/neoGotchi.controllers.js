@@ -13,7 +13,7 @@ module.exports = {
     createUser: (request, response) => {
         console.log("creating user...")
         console.log(request.body)
-        User.create({userID: 'testing'})
+        User.create({name: request.body.name, userID: 'testing'})
             .then(msg => {
                 response.status(201).json(msg)
                 console.log('user created', request.body)
@@ -36,6 +36,18 @@ module.exports = {
                 console.log('LIKE WTF...?')
             });
     },
+    getallUsers: (request, response) => {
+        console.log('getting all users....')
+        User.find()
+            .then(msg => {
+                response.status(200).json({user:msg})
+                console.log('You got all users')
+            })
+            .catch(err => {
+                response.status(404).json(err)
+                console.log('LIKE WTF...?')
+            });
+    },
     updateUser: (request, response) => {
         User.findOneAndUpdate({userID: request.params.id}, request.body, {upsert:true, new: true, setDefaultsOnInsert: true, runValidators:true})
             .then(msg => response.status(202).json(msg))
@@ -52,7 +64,7 @@ module.exports = {
     // Create
     createNeoGotchi: (request, response) => {
         console.log("create is fired!");
-        NeoGotchi.create({owner: 'testing', name:'wasd'})
+        NeoGotchi.create({owner: 'hatchery', name:request.body.name})
             .then(msg => {
                 response.status(201).json(msg);
             })
@@ -69,6 +81,12 @@ module.exports = {
     allNeoGotchi: (request, response) => {
         // console.log("Find all data is fired!")
         NeoGotchi.find()
+            .then(msg => response.status(200).json({neogotchies: msg}))
+            .catch(err => response.status(404).json(err));
+    },
+    hatcheryOwnedNeoGotchi: (request, response) => {
+        // console.log("Find all data is fired!")
+        NeoGotchi.find({owner:'hatchery'})
             .then(msg => response.status(200).json({neogotchies: msg}))
             .catch(err => response.status(404).json(err));
     },
