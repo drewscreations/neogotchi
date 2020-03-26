@@ -25,9 +25,21 @@ module.exports = {
     },
     getUser: (request, response) => {
         console.log('getting user....')
-        User.find({userID: request.params.id})
-            .then(msg => response.status(200).json({users:msg}))
-            .catch(err => response.status(404).json(err));
+        console.log(request.params.id)
+        User.findOne({userID: request.params.id})
+            .then(msg => {
+                response.status(200).json({user:msg})
+                console.log('You got your user')
+            })
+            .catch(err => {
+                response.status(404).json(err)
+                console.log('LIKE WTF...?')
+            });
+    },
+    updateUser: (request, response) => {
+        User.findOneAndUpdate({userID: request.params.id}, request.body, {upsert:true, new: true, setDefaultsOnInsert: true, runValidators:true})
+            .then(msg => response.status(202).json(msg))
+            .catch(err => response.status(304).json(err));
     },
     //owned: all the NeoGotchi's owned by the user
     // ownedNeoGotchi : async (req, res) => {

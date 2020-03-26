@@ -72,9 +72,9 @@ return (
                         <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/hatchery'>
                             <MenuItem onClick={closeHandler}>Hatchery</MenuItem>
                         </NavLink>
-                        <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/market'>
+                        {/* <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/market'>
                             <MenuItem onClick={closeHandler}>Market</MenuItem>
-                        </NavLink>
+                        </NavLink> */}
                         <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/generalstore'>
                             <MenuItem onClick={closeHandler}>General Store</MenuItem>
                         </NavLink>

@@ -5,9 +5,12 @@ const port = 8000;
 const server = app.listen(port, ()=> console.log(`Server running... at ${port}!!!`));
 const io = require('socket.io')(server)
 
+// order of this matters otherwise undefine errors
+app.use(cors(), express.json(), express.urlencoded({extended:true}));
+
 require('./config/mongoose.config');
 require('./routes/neoGotchi.routes')(app);
-app.use(cors(), express.json(), express.urlencoded({extended:true}));
+
 
 
 // io.on('connection', socket=>{

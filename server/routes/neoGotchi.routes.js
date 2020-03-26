@@ -6,6 +6,7 @@ module.exports = (app) => {
     // user route
     app.post('/api/user', NeoGotchiController.createUser);
     app.get('/api/user/:id', NeoGotchiController.getUser);
+    app.put('/api/user/:id', NeoGotchiController.updateUser);
     // neogotchi route
     app.get('/api/neoGotchi', NeoGotchiController.allNeoGotchi);
     app.post('/api/neoGotchi', NeoGotchiController.createNeoGotchi);

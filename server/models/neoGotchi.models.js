@@ -7,7 +7,21 @@ const neoGotchiSchema = new mongoose.Schema({
     },
     name: {
         type:String,
-        required: [true, 'Name is required!']
+        required: [true, 'Provide a name for your pet!']
+    },
+    status: {
+        hunger: {
+            type: Number, 
+            min:0, 
+            required: [true, 'hunger level is required!'],
+            default: 50
+        },
+        happiness: {
+            type: Number, 
+            min:0, 
+            required: [true, 'happiness level is required!'],
+            default: 10
+        },
     },
     exp: {
         strength: {
