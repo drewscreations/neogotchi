@@ -44,17 +44,16 @@ function App() {
             <header>
               <NavBar/>
             </header>
-            {JSON.stringify(isAuthenticated)}
+            {/* {JSON.stringify(isAuthenticated)} */}
             <Switch>
               <Route path='/' exact component={Login}/>
-              <Context.Provider clientSideUser={clientSideUser} setClientSideUser={setClientSideUser}>
-                <PrivateRoute path='/profile' exact component={Profile} />
+              <Context.Provider value={{clientSideUser:clientSideUser, setClientSideUser:setClientSideUser}}>
                 <PrivateRoute path='/neogotchi/world' exact component={World}/>
                 <PrivateRoute path='/neogotchi/home' exact component={Home}/>
                 <PrivateRoute path='/neogotchi/hatchery' exact component={Hatchery}/>
                 <PrivateRoute path='/neogotchi/market' exact component={Market}/>
                 <PrivateRoute path='/neogotchi/generalstore' exact component={GeneralStore}/>
-                <PrivateRoute path='/neogotchi/wildarea' exact component={WildArea}/>
+                {/* <PrivateRoute path='/neogotchi/wildarea' exact component={WildArea}/> */}
               </Context.Provider>
             </Switch>
           </Router>

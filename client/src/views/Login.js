@@ -12,6 +12,7 @@ export default () => {
     return (
         <div>
             <h1>Login, some art that can be displayed in the login?</h1>
+            <img src='https://i.ytimg.com/vi/fiu1qbH37yw/maxresdefault.jpg' alt='placeholder'/>
         </div>
     )
 }

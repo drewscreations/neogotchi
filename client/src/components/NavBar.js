@@ -78,9 +78,9 @@ return (
                         <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/generalstore'>
                             <MenuItem onClick={closeHandler}>General Store</MenuItem>
                         </NavLink>
-                        <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/wildarea'>
+                        {/* <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/wildarea'>
                             <MenuItem onClick={closeHandler}>Wild Area</MenuItem>
-                        </NavLink>
+                        </NavLink> */}
                     </Menu>
                     <Button  color='inherit' onClick={() => logout()}>Log out</Button>
                 </span>

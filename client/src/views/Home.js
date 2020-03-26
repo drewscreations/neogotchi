@@ -2,6 +2,7 @@ import React from 'react'
 import {GameEngine} from 'react-game-engine';
 import { Button } from '@material-ui/core';
 import HomeInside from '../static/img/house_inside.png'
+import StatBar from '../components/StatBar';
 import User from '../entities/User';
 
 import MoveUser from '../systems/userSystem'
@@ -20,6 +21,7 @@ export default function home() {
                 <Button style={{color:'white', background: '#836379', margin: '4px'}}>Play</Button>
                 <Button style={{color:'white', background: '#836379', margin: '4px'}}>Rest</Button>
                 <Button style={{color:'white', background: '#836379', margin: '4px'}}>Work</Button>
+                <StatBar/>
             </GameEngine>
         </div>
     )
