@@ -38,7 +38,7 @@ function App() {
               <PrivateRoute path='/neogotchi/hatchery' component={Hatchery}/>
               <PrivateRoute path='/neogotchi/market' component={Market}/>
               <PrivateRoute path='/neogotchi/generalstore' component={GeneralStore}/>
-              <PrivateRoute path='/neogotchi/wildarea' component={WildArea}/>
+              {/* <PrivateRoute path='/neogotchi/wildarea' component={WildArea}/> */}
             </Switch>
           </Router>
 

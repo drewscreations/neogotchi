@@ -31,6 +31,7 @@ export default () => {
     const classes = useStyles();
 
     const clickHandler = (e) => {
+        e.preventDefault();
         setAnchor(e.currentTarget);
     }
 
@@ -56,13 +57,13 @@ return (
                 <span>
                     <Menu
                         id="simple-menu"
-                        anchor={anchor}
+                        anchorEl={anchor}
                         keepMounted
                         open={Boolean(anchor)}
                         onClose={closeHandler}
                     >
                         <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/neogotchi/home'>Home</NavLink></MenuItem>
-                        <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/profile'>Profile</NavLink></MenuItem>
+                        {/* <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/profile'>Profile</NavLink></MenuItem> */}
                         <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/neogotchi/world'>World</NavLink></MenuItem>
                         <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/neogotchi/hatchery'>Hatchery</NavLink></MenuItem>
                         <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/neogotchi/market'>Market</NavLink></MenuItem>
