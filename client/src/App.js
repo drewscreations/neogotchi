@@ -24,7 +24,7 @@ function App() {
 
   return (
     <div className="App">
-      <div className="App-header">
+      <div>
           {/* Protected routes in private routes for logged in user only! */}
           <Router history={history}>
             <header>
