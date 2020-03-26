@@ -1,16 +1,46 @@
+const User = require('../models/user.models');
 const NeoGotchi = require('../models/neoGotchi.models');
+
 
 module.exports = {
     // index route
     index: (request, response) => {
         response.json({
-        message: "Hello, this is index"
+        message: "Hello, Welcome to the NeoGotchi api..."
             });
     },
+        //  ===== User CRUD =====
+    createUser: (request, response) => {
+        console.log("creating user...")
+        console.log(request.body)
+        User.create({userID: 'testing'})
+            .then(msg => {
+                response.status(201).json(msg)
+                console.log('user created', request.body)
+            })
+            .catch(err => {
+                response.status(400).json(err)
+                console.log('something went wrong...')
+            });
+    },
+    getUser: (request, response) => {
+        console.log('getting user....')
+        User.find({userID: request.params.id})
+            .then(msg => response.status(200).json({users:msg}))
+            .catch(err => response.status(404).json(err));
+    },
+    //owned: all the NeoGotchi's owned by the user
+    // ownedNeoGotchi : async (req, res) => {
+    //     const { id } = req.params; //user's ID
+    //     const user = await User.findById(id).populate('neoGotchi')
+    //         .catch(err => response.status(404).json(err));
+    //     res.send(user.neoGotchi);
+    // },
+    // ====== CRUD for NeoGotchi =====
     // Create
     createNeoGotchi: (request, response) => {
         console.log("create is fired!");
-        NeoGotchi.create(request.body)
+        NeoGotchi.create({owner: 'testing', name:'wasd'})
             .then(msg => {
                 response.status(201).json(msg);
             })
@@ -23,11 +53,11 @@ module.exports = {
             .then(msg=>response.status(200).json(msg))
             .catch(err => response.status(404).json(err));
     },
-    // Read: find all NeoGotchi in database
+    // Read: find all NeoGotchi in database =====Good for debuggin purpose only=====
     allNeoGotchi: (request, response) => {
         // console.log("Find all data is fired!")
         NeoGotchi.find()
-            .then(msg => response.status(200).json({NeoGotchis: msg}))
+            .then(msg => response.status(200).json({neogotchies: msg}))
             .catch(err => response.status(404).json(err));
     },
     // Update: update the target NeoGotchi
@@ -43,12 +73,5 @@ module.exports = {
         NeoGotchi.deleteOne({_id:request.params.id})
             .then(deleteConfirmation => response.status(200).json(deleteConfirmation))
             .catch(err => response.status(400).json(err));
-    },
-    //owned: all the NeoGotchi's owned by the user
-    ownedNeoGotchi : async (req, res) => {
-        const { id } = req.params; //user's ID
-        const user = await User.findById(id).populate('neoGotchi')
-            .catch(err => response.status(404).json(err));
-        res.send(user.neoGotchi);
-     }
+    }
 }
