@@ -4,12 +4,13 @@ import { useAuth0 } from "../react-auth0-spa";
 
 import { fade, makeStyles } from '@material-ui/core/styles';
 import { AppBar, Toolbar, Typography, Button, IconButton, Menu, MenuItem } from '@material-ui/core'
-// import AppBar from '@material-ui/core/AppBar';
-// import Toolbar from '@material-ui/core/Toolbar';
-// import Typography from '@material-ui/core/Typography';
-// import Button from '@material-ui/core/Button';
-// import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
+import HomeIcon from '@material-ui/icons/Home';
+import PublicIcon from '@material-ui/icons/Public';
+import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
+import StorefrontIcon from '@material-ui/icons/Storefront';
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
+import StatBar from './StatBar'
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -43,48 +44,60 @@ return (
     <div className={classes.root}>
         <AppBar position="static" style={{background:'#836379'}}>
             <Toolbar>
-            <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
-            aria-controls="simple-menu" aria-haspopup="true" onClick={clickHandler}
-            >
-                <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-                NeoGotchi
-            </Typography>
-            {!isAuthenticated && <Button color='inherit' onClick={() => loginWithRedirect({})}>Log in</Button>}
-
             {isAuthenticated && (
+                <IconButton edge="start" className={classes.menuButton} color="inherit" aria-label="menu"
+                aria-controls="navbar" aria-haspopup="true" onClick={clickHandler}
+                >
+                    <EmojiPeopleIcon/>
+                </IconButton>
+            )}
+
+            <Typography variant="h6" className={classes.title}>
+                {isAuthenticated? 
+                    'hello user'
+                :
+                    'NeoGotchi'}
+            </Typography>
+            {/* {!isAuthenticated && <Button color='inherit' onClick={() => loginWithRedirect({})}>Log in</Button>} */}
+
+            {isAuthenticated ? (
                 <span>
                     <Menu
-                        id="simple-menu"
+                        id="navbar"
                         anchorEl={anchor}
                         keepMounted
                         open={Boolean(anchor)}
                         onClose={closeHandler}
                     >
                         <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/home'>
-                            <MenuItem onClick={closeHandler}>Home</MenuItem>
+                            <MenuItem onClick={closeHandler}><HomeIcon/> Home</MenuItem>
                         </NavLink>
                         {/* <MenuItem onClick={closeHandler}><NavLink style={{textDecoration:'none'}} to='/profile'>Profile</NavLink></MenuItem> */}
                         <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/world'>
-                            <MenuItem onClick={closeHandler}>World</MenuItem>
+                            <MenuItem onClick={closeHandler}><PublicIcon/> World</MenuItem>
                         </NavLink>
                         <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/hatchery'>
-                            <MenuItem onClick={closeHandler}>Hatchery</MenuItem>
+                        <MenuItem onClick={closeHandler}><ChildFriendlyIcon/>Hatchery</MenuItem>
                         </NavLink>
                         {/* <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/market'>
                             <MenuItem onClick={closeHandler}>Market</MenuItem>
                         </NavLink> */}
                         <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/generalstore'>
-                            <MenuItem onClick={closeHandler}>General Store</MenuItem>
+                            <MenuItem onClick={closeHandler}><StorefrontIcon/>Store</MenuItem>
                         </NavLink>
                         {/* <NavLink style={{textDecoration:'none', color:'#836379'}} to='/neogotchi/wildarea'>
                             <MenuItem onClick={closeHandler}>Wild Area</MenuItem>
                         </NavLink> */}
+                        <MenuItem style={{textDecoration:'none', color:'#836379'}}  onClick={() => logout()}>
+                            <ExitToAppIcon/>Log out
+                        </MenuItem>
                     </Menu>
-                    <Button  color='inherit' onClick={() => logout()}>Log out</Button>
+                    <StatBar className={classes.root}/>
                 </span>
-            )}
+            )
+            :
+            <Button color='inherit' onClick={() => loginWithRedirect({})}>Log in</Button>
+            }
             </Toolbar>
         </AppBar>
     </div>
