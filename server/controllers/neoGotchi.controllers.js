@@ -85,6 +85,15 @@ module.exports = {
             .then(msg => response.status(200).json({neogotchies: msg}))
             .catch(err => response.status(404).json(err));
     },
+    userOwnedNeoGotchi: (request, response) => {
+        // console.log("Find all data is fired!")
+        console.log('request body:',request.body)
+        console.log('request.params:',request.params)
+        console.log('finding pets for:',request.params.owner)
+        NeoGotchi.find({owner:request.params.id})
+            .then(msg => response.status(200).json({neogotchies: msg}))
+            .catch(err => response.status(404).json(err));
+    },
     hatcheryOwnedNeoGotchi: (request, response) => {
         // console.log("Find all data is fired!")
         NeoGotchi.find({owner:'hatchery'})

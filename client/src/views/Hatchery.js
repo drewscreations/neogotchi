@@ -1,10 +1,11 @@
-import React, {useEffect, useReducer} from 'react'
+import React, {useEffect, useReducer, useContext} from 'react'
 import {GameEngine} from 'react-game-engine';
 import HatcheryInside from '../static/img/hatchery_inside.png'
 import Egg from '../entities/Egg';
 import HomeBtn from '../components/HomeBtn';
 import eggSystem from '../systems/eggSystem'
 import axios from 'axios'
+
 
 // import MoveUser from '../systems/userController'
 const initialState = {
@@ -27,16 +28,11 @@ const reducer = (state, action) =>{ //this is used to update state...updates dif
     }  
 }
 export default ()=> {
+
+
     const BackgroundUrl = `url(${HatcheryInside})`;
     const [state, dispatch] = useReducer(reducer, initialState);
-    let eggEntities=[]
-    let myName='';
-    const createEggs = () =>{
-        let eggEntities = []
-        state.generalStoreInv.map((inv, index)=>eggEntities.push({position:{x:100,y:750}, name:inv.name, sprite:'', renderer:<Egg/>}))
-        return eggEntities
-    }
-    
+
     useEffect(()=>{
         console.log('inside useEffect');
         axios.get('http://localhost:8000/api/neoGotchi/hatcheryOwned').
@@ -47,11 +43,6 @@ export default ()=> {
                 payload:[...res.data.neogotchies]
             })
         })
-        .then(res=>{
-            eggEntities=createEggs();
-            // console.log('eggEntities',eggEntities, 'first one',eggEntities[0]!==undefined?eggEntities[0].name:'not loaded yet');
-            myName=eggEntities[0];    
-        })
         // then(console.log("state's inv",state.generalStoreInv))
     },[])
 
@@ -59,7 +50,7 @@ export default ()=> {
         .then(res=>{
             const eggEntities = [...res.data.neogotchies];
             const myObjectEntries = [];
-            eggEntities.map((item, index)=>myObjectEntries.push({position:{x:100+200*index,y:550}, egg:true, cost: 100*item.totalExp+100, name:item.name, sprite:'', renderer:<Egg/>}))
+            eggEntities.map((item, index)=>myObjectEntries.push({position:{x:100+200*index,y:550}, egg:true, cost: 100*item.totalExp+100, id:item._id, name:item.name, sprite:'', renderer:<Egg/>}))
             return myObjectEntries
         })
     
