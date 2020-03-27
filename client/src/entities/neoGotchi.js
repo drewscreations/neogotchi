@@ -45,11 +45,11 @@ const NeoGotchi = (props) =>{
       const mouseLeaveHandler = (e)=>{
             setNavigateBtn(false)
       }
-    const clickHandler= (e)=>{
-        console.log('clicked!')
-        divHolder.current.focus();
-        console.log(divHolder.current);
-        divHolder.current.style.border = '1px dotted blue';
+      const clickHandler= (e)=>{
+            console.log('clicked!')
+            divHolder.current.focus();
+            console.log(divHolder.current);
+            divHolder.current.style.border = '1px dotted blue';
       }
       const divHolder = useRef(null)
       const divStyle = { position: "absolute", width: size, height: size, left: x, top: y }
