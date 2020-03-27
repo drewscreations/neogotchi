@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 
+
 const UserSchema = new mongoose.Schema({
     name: {
         type:String,
@@ -15,9 +16,9 @@ const UserSchema = new mongoose.Schema({
         required: [true, "please provide the gold count of the player"],
         default: 500
     },
-    inventory: {
-        
-    },
+    inventory: [
+        {type: mongoose.Schema.Types.ObjectId, ref:'item'}
+    ],
     exp: {
         petRaising: {
             type: Number, 
