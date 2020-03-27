@@ -115,7 +115,13 @@ module.exports = {
             .then(deleteConfirmation => response.status(200).json(deleteConfirmation))
             .catch(err => response.status(400).json(err));
     },
-
+    //empty hatchery
+    deleteAllHatcheryNeoGotchi: (request, response) => {
+        console.log("Delete is fired!");
+        NeoGotchi.deleteMany({owner:'hatchery'})
+            .then(deleteConfirmation => response.status(200).json(deleteConfirmation))
+            .catch(err => response.status(400).json(err));
+    },
     // ====== CRUD for Items =====
     // Create
     createItem: (request, response) => {

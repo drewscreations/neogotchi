@@ -16,6 +16,7 @@ module.exports = (app) => {
     app.get('/api/neoGotchi/:id', NeoGotchiController.oneNeoGotchi);
     app.put('/api/neoGotchi/:id/edit', NeoGotchiController.updateNeoGotchi);
     app.delete('/api/neoGotchi/delete/:id', NeoGotchiController.deleteNeoGotchi);
+    app.delete('/api/neoGotchi/deleteHatcheryOwned', NeoGotchiController.deleteAllHatcheryNeoGotchi)
     //items route
     app.get('/api/items', NeoGotchiController.allItems);
     app.post('/api/items', NeoGotchiController.createItem);

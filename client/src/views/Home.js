@@ -82,7 +82,7 @@ export default () => {
                 <Button style={{color:'white', background: '#836379', margin: '4px'}}>Rest</Button>
                 <Button style={{color:'white', background: '#836379', margin: '4px'}}>Work</Button>
             </GameEngine>
-            {state.ownedPets.map((item, index)=><p key={index}>pet: {item.name}</p>)}
+            {/* {state.ownedPets.map((item, index)=><p key={index}>pet: {item.name}</p>)} */}
         </div>
     )
 }

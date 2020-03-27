@@ -27,7 +27,8 @@ const Egg = (props) =>{
             setNavigateBtn(false)
       }
       const onPurchaseHandler = (e) =>{
-            console.log('inside purchase handler')
+            console.log('inside purchase handler');
+            axios.put(`http://localhost:8000/api/user/${user.clientSideUser.userID}`, {gold: user.clientSideUser.gold - props.cost})
             axios.put('http://localhost:8000/api/neoGotchi/'+props.id+'/edit', {owner:user.clientSideUser._id});
             console.log('user id',user.clientSideUser._id)
       }
