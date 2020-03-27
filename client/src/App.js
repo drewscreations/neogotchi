@@ -48,7 +48,6 @@ function App() {
               <header>
                 <NavBar/>
               </header>
-              {/* {JSON.stringify(isAuthenticated)} */}
               <Switch>
                 <Route path='/' exact component={Login}/>
                 
