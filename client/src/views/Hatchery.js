@@ -53,9 +53,9 @@ export default ()=> {
             eggEntities.map((item, index)=>myObjectEntries.push({position:{x:100+200*index,y:550}, egg:true, cost: 100*item.totalExp+100, id:item._id, name:item.name, sprite:'', renderer:<Egg/>}))
             return myObjectEntries
         })
-    const clickHandler = () =>{
-        axios.post('http://localhost:8000/api/neoGotchi/',{name:'newEgg'})
-    }
+    // const clickHandler = () =>{
+    //     axios.post('http://localhost:8000/api/neoGotchi/',{name:'newEgg'})
+    // }
     return (
         <div>
             <GameEngine
@@ -67,7 +67,7 @@ export default ()=> {
                 }}>
 
             </GameEngine>
-            <button onClick={clickHandler()}>add egg</button>
+            
         </div>
     )
 }
