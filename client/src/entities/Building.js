@@ -1,9 +1,12 @@
 import React, {useRef, useState} from 'react';
 import { Link } from 'react-router-dom'
 import { Button } from '@material-ui/core';
-import House from '../static/img/house.png';
-import Store from '../static/img/store.png';
-import Hatchery from '../static/img/hatchery.png';
+import House from '../static/img/buildings/houseclosed.png';
+import HouseOpen from '../static/img/buildings/houseopen.png'
+import Store from '../static/img/buildings/storeclosed.png';
+import StoreOpen from '../static/img/buildings/storeopen.png'
+import Hatchery from '../static/img/buildings/hatcheryclosed.png';
+import HatcheryOpen from '../static/img/buildings/hatcheryopen.png';
 import Lake from '../static/img/lake.png'
 import Forrest from '../static/img/forrest.png'
 
@@ -30,12 +33,14 @@ const Building = (props) =>{
      
       const mouseOverHandler = (e)=>{
             picHolder.current.focus();
+            picHolder.current.src=imageSrcDict[name].open
             // console.log(picHolder.current.src)
             // picHolder.current.style.height ='200px';//until i get opening door image or something
             setNavigateBtn(true);
       }
       const mouseLeaveHandler = (e)=>{
             picHolder.current.focus();
+            picHolder.current.src=imageSrcDict[name].closed
             // picHolder.current.style.height =`${size}px`;
             setNavigateBtn(false)
       }
@@ -46,12 +51,34 @@ const Building = (props) =>{
             lake:'/neogotchi/lake',
             forrest:'/neogotchi/forrest'
       }
+      const imageSrcDict={
+            house:{
+                  closed:House,
+                  open:HouseOpen
+            },
+            store:{
+                  closed:Store,
+                  open:StoreOpen
+            },
+            hatchery:{
+                  closed:Hatchery,
+                  open:HatcheryOpen
+            },
+            lake:{
+                  closed:Lake,
+                  open:Lake
+            },
+            forrest:{
+                  closed:Forrest,
+                  open:Forrest
+            }
+      }
       const linkTo = linkToDict[name]
 
       return (
             <a>
                   <div onMouseEnter={e=>mouseOverHandler(e)} onMouseLeave={e=>mouseLeaveHandler(e)}  style={divStyle}>
-                        <img src={name==="store"?Store:name==="house"?House:name==="hatchery"?Hatchery:name==="lake"?Lake:name==="forrest"?Forrest:null} style={{height:'100%', width:'100%', objectFit: 'contain'}} alt={"logo"} ref={picHolder} />
+                        <img src={imageSrcDict[name].closed} style={{height:'100%', width:'100%', objectFit: 'contain'}} alt={"logo"} ref={picHolder} />
                         <div style={{color:'black'}}>{props.name}</div>
                         {navigateBtn?<Link to={linkTo} style={{textDecoration:'none'}}> <Button style={{color:'white', background:'skyblue'}}>GO!</Button> </Link>:null}
                   </div>

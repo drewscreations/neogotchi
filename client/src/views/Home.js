@@ -1,12 +1,60 @@
-import React from 'react'
+import React, {useReducer, useContext, useEffect} from 'react'
 import {GameEngine} from 'react-game-engine';
 import { Button } from '@material-ui/core';
 import HomeInside from '../static/img/house_inside.png'
 import User from '../entities/User';
+import myUser from '../context/context'
+import axios from 'axios'
 
 import MoveUser from '../systems/userSystem'
-export default function home() {
+
+const initialState = {
+    userID:'test',
+    ownedPets:['none yet'],
+    activePet:{},
+    loaded:false,
+}
+const reducer = (state, action) =>{
+    switch(action.type){
+        case 'ownedPets':
+            console.log('changing state generalInv')
+            return {
+                ...state,
+                ownedPets:[...action.payload]
+            }
+        default://do nothing but still rerender page
+            return {
+                ...state,  
+                [action.type]:[action.payload]
+            }
+    }  
+
+}
+export default () => {
+    const [state, dispatch] = useReducer(reducer, initialState);
+    const user = useContext(myUser);
+    console.log('user',user)
     const BackgroundUrl = `url(${HomeInside})`;
+    const userID = user.clientSideUser._id;
+    console.log('userid',userID)
+    useEffect(()=>{
+        dispatch({type:'userID', payload:userID});
+        dispatch({type:'loaded', payload:true})},[])
+    console.log('user id from state',state.userID)
+    useEffect(()=>{
+        if(state.loaded&&userID!==undefined){
+        axios.get('http://localhost:8000/api/neoGotchi/userOwned/'+userID)
+        .then(res=>{
+            console.log('successful axios response',res.data.neogotchies);
+            dispatch({type:'ownedPets',payload:res.data.neogotchies});
+            console.log('state.owned pets is now',state.ownedPets)
+        })
+        .then(
+            dispatch({type:'loaded', payload:false})
+        )
+        
+    }},[userID])
+    console.log(state)
     return (
         <div>
             <GameEngine
@@ -21,6 +69,7 @@ export default function home() {
                 <Button style={{color:'white', background: '#836379', margin: '4px'}}>Rest</Button>
                 <Button style={{color:'white', background: '#836379', margin: '4px'}}>Work</Button>
             </GameEngine>
+            {state.ownedPets.map((item, index)=><p key={index}>pet: {item.name}</p>)}
         </div>
     )
 }
