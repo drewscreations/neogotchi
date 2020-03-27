@@ -37,7 +37,7 @@ const Egg = (props) =>{
 
             <div onMouseEnter={e=>mouseOverHandler(e)} onMouseLeave={e=>mouseLeaveHandler(e)} style={divStyle}>
             <img src={DefaultEgg} alt={"logo"}/>
-            <div style={{color:'black'}}>Name: {props.name}, Cost: {props.cost}, id: {props.id}</div>
+            <div style={{color:'black'}}>Name: {props.name}, Cost: {props.cost}</div>
             {navigateBtn?<Button onClick={(e)=>onPurchaseHandler()} style={{color:'white', background:'skyblue'}}>Buy Me!</Button>:null}
             </div>
 

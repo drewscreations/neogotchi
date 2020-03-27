@@ -109,7 +109,7 @@ export default () => {
                 <RestBtn neogotchi={state.activePet}/>
                 <WorkBtn neogotchi={state.activePet}/>
             </GameEngine>
-            {state.ownedPets.map((item, index)=><p key={index}>pet: {item.name}</p>)}
+            {/* {state.ownedPets.map((item, index)=><p key={index}>pet: {item.name}</p>)} */}
         </div>
     )
 }
