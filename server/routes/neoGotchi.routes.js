@@ -15,4 +15,10 @@ module.exports = (app) => {
     app.get('/api/neoGotchi/:id', NeoGotchiController.oneNeoGotchi);
     app.put('/api/neoGotchi/:id/edit', NeoGotchiController.updateNeoGotchi);
     app.delete('/api/neoGotchi/delete/:id', NeoGotchiController.deleteNeoGotchi);
+    //items route
+    app.get('/api/items', NeoGotchiController.allItems);
+    app.post('/api/items', NeoGotchiController.createItem);
+    app.get('/api/items/:id', NeoGotchiController.oneItem);
+    app.put('/api/items/:id/edit', NeoGotchiController.updateItem);
+    app.delete('/api/items/delete/:id', NeoGotchiController.deleteItem);
 }

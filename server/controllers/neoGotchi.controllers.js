@@ -1,5 +1,6 @@
 const User = require('../models/user.models');
 const NeoGotchi = require('../models/neoGotchi.models');
+const Item = require('../models/item.models');
 
 
 module.exports = {
@@ -101,6 +102,45 @@ module.exports = {
     deleteNeoGotchi: (request, response) => {
         console.log("Delete is fired!");
         NeoGotchi.deleteOne({_id:request.params.id})
+            .then(deleteConfirmation => response.status(200).json(deleteConfirmation))
+            .catch(err => response.status(400).json(err));
+    },
+
+    // ====== CRUD for Items =====
+    // Create
+    createItem: (request, response) => {
+        console.log("create is fired!");
+        Item.create({name:request.body.name, description:request.body.description, cost:request.body.cost, category:request.body.category})
+            .then(msg => {
+                response.status(201).json(msg);
+            })
+            .catch(err => response.status(400).json(err));
+    },
+    // Read: find one item base on ID
+    oneItem:(request, response) => {
+        console.log('Search based on ID is fired!');
+        Item.findOne({_id:request.params.id})
+            .then(msg=>response.status(200).json(msg))
+            .catch(err => response.status(404).json(err));
+    },
+    // Read: find all items in database =====Good for debuggin purpose only=====
+    allItems: (request, response) => {
+        // console.log("Find all data is fired!")
+        Item.find()
+            .then(msg => response.status(200).json({items: msg}))
+            .catch(err => response.status(404).json(err));
+    },
+    // Update: update the target NeoGotchi
+    updateItem: (request, response) => {
+        console.log("Update is fired!!");
+        Item.findByIdAndUpdate({_id:request.params.id}, request.body, {runValidators: true})
+            .then(msg => response.status(202).json(msg))
+            .catch(err => response.status(304).json(err));
+    },
+    // Delete: delete target NeoGotchi
+    deleteItem: (request, response) => {
+        console.log("Delete is fired!");
+        Item.deleteOne({_id:request.params.id})
             .then(deleteConfirmation => response.status(200).json(deleteConfirmation))
             .catch(err => response.status(400).json(err));
     }
