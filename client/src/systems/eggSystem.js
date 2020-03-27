@@ -17,7 +17,7 @@ const eggHandler = (entities, {input}) => {
         inventoryPromise.then(res=>{
             res.map((item, index)=>entities[item.name]=item)
         })
-        entities.inventoryPromise=false// only does this once hopefully
+        // entities.inventoryPromise=false// only does this once hopefully
     }
     return entities
     }

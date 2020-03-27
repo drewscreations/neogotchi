@@ -5,6 +5,8 @@ import HomeInside from '../static/img/house_inside.png'
 import User from '../entities/User';
 import myUser from '../context/context'
 import axios from 'axios'
+import neoGotchiSystem from '../systems/neoGotchiSystem'
+import NeoGotchi from '../entities/neoGotchi'
 
 import MoveUser from '../systems/userSystem'
 
@@ -55,13 +57,24 @@ export default () => {
         
     }},[userID])
     console.log(state)
+    const inventoryPromise = axios.get('http://localhost:8000/api/neoGotchi/userOwned/'+userID)
+        .then(res=>{
+            // console.log('incventory promise res.data:',res.data)
+            const neoEntities = [...res.data.neogotchies];
+            // console.log('eneo enitiesL:',neoEntities)
+            const myObjectEntries = [];
+            neoEntities.map((item, index)=>myObjectEntries.push({position:{x:100+200*index,y:550}, neo:true, direction:'left', active:false, wholePackage:item, id:item._id, name:item.name, sprite:'', renderer:<NeoGotchi/>}))
+            console.log('myobject entries:',myObjectEntries)
+            return myObjectEntries
+        })
     return (
         <div>
             <GameEngine
                 style={{ width: 1000, height: 600, backgroundImage:BackgroundUrl, backgroundSize:"100%"}}
-                // systems={[MoveUser]}
+                systems={[neoGotchiSystem]}
                 entities={
                 {
+                    inventoryPromise
                     // user: { position:{x:100,y:100}, name:'user', sprite:'user.png', renderer: <User />},
                 }}>
                 <Button style={{color:'white', background: '#836379', margin: '4px'}}>Feed</Button>
