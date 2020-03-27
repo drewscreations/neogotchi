@@ -3,9 +3,9 @@ import { Button } from '@material-ui/core';
 import Context from '../context/context';
 import axios from 'axios';
 
-export default function WorkBtn(props) {
+export default (props) => {
     const randomVal = (num) => {
-        Math.random()*num
+        return Math.random()*num
     }
 
     const context = useContext(Context);
@@ -24,8 +24,6 @@ export default function WorkBtn(props) {
     }
 
     return (
-        <div>
-            <Button onClick={e => clickHandler(e, props.neogotchi._id)}>Feed</Button>
-        </div>
+            <Button onClick={e => clickHandler(e, props.neogotchi._id)} style={{color:'white', background: '#836379', margin: '4px'}}>Work</Button>
     )
 }

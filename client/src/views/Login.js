@@ -7,7 +7,7 @@ export default () => {
     const { loading, isAuthenticated } = useAuth0();
 
     if (!loading && isAuthenticated) {
-        return <Redirect to='/neogotchi/home' push/>
+        return <Redirect to='/neogotchi/world' push/>
     }
 
     return (

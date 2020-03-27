@@ -7,6 +7,11 @@ import myUser from '../context/context'
 import axios from 'axios'
 import neoGotchiSystem from '../systems/neoGotchiSystem'
 import NeoGotchi from '../entities/neoGotchi'
+import WorkBtn from '../components/WorkBtn';
+import FeedBtn from '../components/FeedBtn';
+import PlayBtn from '../components/PlayBtn';
+import RestBtn from '../components/RestBtn';
+
 
 import MoveUser from '../systems/userSystem'
 
@@ -57,13 +62,21 @@ export default () => {
         
     }},[userID])
     console.log(state)
+
+    const clickHandler = (e) => {
+        console.log('pet has been clicked')
+    }
+
     const inventoryPromise = axios.get('http://localhost:8000/api/neoGotchi/userOwned/'+userID)
         .then(res=>{
             // console.log('incventory promise res.data:',res.data)
             const neoEntities = [...res.data.neogotchies];
             // console.log('eneo enitiesL:',neoEntities)
             const myObjectEntries = [];
-            neoEntities.map((item, index)=>myObjectEntries.push({position:{x:100+200*index,y:550}, neo:true, direction:'left', active:false, wholePackage:item, id:item._id, name:item.name, sprite:'', renderer:<NeoGotchi/>}))
+            neoEntities.map((item, index)=>
+                myObjectEntries.push({position:{x:100+200*index,y:550}, neo:true, 
+                    direction:'left', active:false, wholePackage:item, id:item._id, 
+                    name:item.name, sprite:'', renderer:<NeoGotchi onClick={clickHandler}/>}))
             console.log('myobject entries:',myObjectEntries)
             return myObjectEntries
         })
@@ -77,12 +90,14 @@ export default () => {
                     inventoryPromise
                     // user: { position:{x:100,y:100}, name:'user', sprite:'user.png', renderer: <User />},
                 }}>
-                <Button style={{color:'white', background: '#836379', margin: '4px'}}>Feed</Button>
-                <Button style={{color:'white', background: '#836379', margin: '4px'}}>Play</Button>
-                <Button style={{color:'white', background: '#836379', margin: '4px'}}>Rest</Button>
-                <Button style={{color:'white', background: '#836379', margin: '4px'}}>Work</Button>
+                    {JSON.stringify(state)}
+                <FeedBtn/>
+                <PlayBtn/>
+                <RestBtn/>
+                <WorkBtn/>
             </GameEngine>
             {state.ownedPets.map((item, index)=><p key={index}>pet: {item.name}</p>)}
         </div>
     )
 }
+

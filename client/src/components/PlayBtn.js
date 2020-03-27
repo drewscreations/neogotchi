@@ -2,9 +2,9 @@ import React from 'react'
 import { Button } from '@material-ui/core';
 import axios from 'axios';
 
-export default function PlayBtn(props) {
+export default (props) => {
     const randomVal = (num) => {
-        Math.random()*num
+        return Math.random()*num
     }
 
     const clickHandler = (e, id) => {
@@ -18,8 +18,6 @@ export default function PlayBtn(props) {
     }
 
     return (
-        <div>
-            <Button onClick={e => clickHandler(e, props.neogotchi._id)}>Feed</Button>
-        </div>
+            <Button onClick={e => clickHandler(e, props.neogotchi._id)} style={{color:'white', background: '#836379', margin: '4px'}}>Play</Button>
     )
 }
