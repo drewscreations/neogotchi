@@ -29,6 +29,11 @@ const reducer = (state, action) =>{
                 ...state,
                 ownedPets:[...action.payload]
             }
+        case 'activePet':
+            return {
+                ...state,
+                activePet:{...action.payload}
+            }
         default://do nothing but still rerender page
             return {
                 ...state,  
@@ -63,8 +68,12 @@ export default () => {
     }},[userID])
     console.log(state)
 
-    const clickHandler = (e) => {
+    const clickHandler = (e, pet) => {
         console.log('pet has been clicked')
+        dispatch({
+            type:'activePet',
+            payload:{...pet}
+        })
     }
 
     const inventoryPromise = axios.get('http://localhost:8000/api/neoGotchi/userOwned/'+userID)
@@ -76,7 +85,7 @@ export default () => {
             neoEntities.map((item, index)=>
                 myObjectEntries.push({position:{x:100+200*index,y:550}, neo:true, 
                     direction:'left', active:false, wholePackage:item, id:item._id, 
-                    name:item.name, sprite:'', renderer:<NeoGotchi onClick={clickHandler}/>}))
+                    name:item.name, sprite:'', setActivePet:clickHandler, renderer:<NeoGotchi/>}))
             console.log('myobject entries:',myObjectEntries)
             return myObjectEntries
         })
