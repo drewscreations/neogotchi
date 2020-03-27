@@ -38,7 +38,7 @@ const neoGotchiSchema = new mongoose.Schema({
             required: [true, 'Dex exp is required!'],
             default: 0
         },
-        intellegence: {
+        intelligence: {
             type: Number, 
             min:[0, 'Exp cannot be negative!'], 
             required: [true, 'Int exp is required!'],

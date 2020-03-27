@@ -1,12 +1,16 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Button } from '@material-ui/core';
 import axios from 'axios';
 
 export default function FeedBtn(props) {
+    const randomVal = (num) => {
+        Math.random()*num
+    }
 
     const clickHandler = (e, id) => {
         e.preventDefault();
-        axios.put(`http://localhost:8000/api/neoGotchi/${id}/update`, {hunger:props.neogotchi.hunger+(Math.random()*20), })
+        // add user purchasing food after testing is completed
+        axios.put(`http://localhost:8000/api/neoGotchi/${id}/edit`, {status:{hunger:props.neogotchi.status.hunger+randomVal(20), happiness:props.neogotchi.status.happiness+randomVal(20)}})
             .then(res => console.log(res))
             .catch(err => console.log(err));
     }
