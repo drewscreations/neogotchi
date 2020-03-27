@@ -49,13 +49,19 @@ export default ()=> {
         })
         .then(res=>{
             eggEntities=createEggs();
-            console.log('eggEntities',eggEntities, 'first one',eggEntities[0]!==undefined?eggEntities[0].name:'not loaded yet');
+            // console.log('eggEntities',eggEntities, 'first one',eggEntities[0]!==undefined?eggEntities[0].name:'not loaded yet');
             myName=eggEntities[0];    
         })
         // then(console.log("state's inv",state.generalStoreInv))
     },[])
 
-    
+    const inventoryPromise = axios.get('http://localhost:8000/api/neoGotchi/hatcheryOwned')
+        .then(res=>{
+            const eggEntities = [...res.data.neogotchies];
+            const myObjectEntries = [];
+            eggEntities.map((item, index)=>myObjectEntries.push({position:{x:100+200*index,y:550}, egg:true, cost: 100*item.totalExp+100, name:item.name, sprite:'', renderer:<Egg/>}))
+            return myObjectEntries
+        })
     
     return (
         <div>
@@ -64,17 +70,10 @@ export default ()=> {
                 systems={[eggSystem]}
                 entities={
                 {
-    
-
-                    egg1: {position:{x:100,y:550}, egg:true, name:myName, sprite:'', renderer:<Egg/>},
-                    egg2: {position:{x:300,y:550}, name:'egg', sprite:'', renderer:<Egg/>},
-                    egg3: {position:{x:500,y:550}, name:'egg', sprite:'', renderer:<Egg/>}
-                    // // user: { position:{x:100,y:100}, name:'user', sprite:'user.png', renderer: <User />},
+                    inventoryPromise
                 }}>
 
             </GameEngine>
-            {/* <button onClick={(e)=>dispatch({type:'default', payload:'testing'})}>hi</button> */}
-            <div>{state.generalStoreInv.map((inv, index)=><p key={index}>{inv.name}</p>)}</div>
             
         </div>
     )

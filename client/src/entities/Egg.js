@@ -1,7 +1,10 @@
-import React from 'react';
-import userImg from '../static/img/user.png';
+import React, {useState} from 'react';
 
+import { Link } from 'react-router-dom'
+import { Button } from '@material-ui/core';
+import DefaultEgg from '../static/img/defaultEgg.png'
 const Egg = (props) =>{
+      const [navigateBtn, setNavigateBtn] = useState(false);
       //props.(position, name, sprite, renderer)
       //if main, props.position.main = "house, store, etc., otherwise, props.position(x, y)"
 
@@ -12,14 +15,20 @@ const Egg = (props) =>{
       const y = position.y - size/2;
       
       //ill move the import up one level to whatever view its in, then pass the imported pics as prop in the prop.sprite
-      const BackgroundUrl = `url(${userImg})`;
       // console.log('making egg')
-
+      const mouseOverHandler = (e)=>{
+            setNavigateBtn(true);
+      }
+      const mouseLeaveHandler = (e)=>{
+            setNavigateBtn(false)
+      }
+      const divStyle = { position: "absolute", width: size, height: size, left: x, top: y }
       return (
 
-            <div style={{ position: "absolute", width: size, height: size, backgroundColor:'purple', left: x, top: y }}>
-            {/* <img src={Store} alt={"logo"}/> */}
-            <div style={{color:'black'}}>{props.name}</div>
+            <div onMouseEnter={e=>mouseOverHandler(e)} onMouseLeave={e=>mouseLeaveHandler(e)} style={divStyle}>
+            <img src={DefaultEgg} alt={"logo"}/>
+            <div style={{color:'black'}}>Name: {props.name}, Cost: {props.cost}</div>
+            {navigateBtn?<Link to='/' style={{textDecoration:'none'}}> <Button style={{color:'white', background:'skyblue'}}>Buy Me!</Button> </Link>:null}
             </div>
 
       );
