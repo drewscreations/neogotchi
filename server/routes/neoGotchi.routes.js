@@ -13,7 +13,7 @@ module.exports = (app) => {
     app.get('/api/neoGotchi/hatcheryOwned', NeoGotchiController.hatcheryOwnedNeoGotchi);
     app.post('/api/neoGotchi', NeoGotchiController.createNeoGotchi);
     app.get('/api/neoGotchi/:id', NeoGotchiController.oneNeoGotchi);
-    app.put('/api/neoGotchi/:id/edit', NeoGotchiController.updateNeoGotchi);
+    app.put('/api/neoGotchi/:id/action', NeoGotchiController.updateNeoGotchi);
     app.delete('/api/neoGotchi/delete/:id', NeoGotchiController.deleteNeoGotchi);
     //items route
     app.get('/api/items', NeoGotchiController.allItems);

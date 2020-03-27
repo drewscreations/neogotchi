@@ -13,12 +13,14 @@ const neoGotchiSchema = new mongoose.Schema({
         hunger: {
             type: Number, 
             min:0, 
+            max:[100, 'Too much feeding can cause obesity and death, please feed responsibly!'],
             required: [true, 'hunger level is required!'],
             default: 50
         },
         happiness: {
             type: Number, 
-            min:0, 
+            min:0,
+            max:[100, 'your pet is too happy right now, time for some work'],
             required: [true, 'happiness level is required!'],
             default: 10
         },
