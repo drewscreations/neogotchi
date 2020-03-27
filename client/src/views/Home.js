@@ -96,7 +96,7 @@ export default () => {
                 <RestBtn/>
                 <WorkBtn/>
             </GameEngine>
-            {state.ownedPets.map((item, index)=><p key={index}>pet: {item.name}</p>)}
+            {/* {state.ownedPets.map((item, index)=><p key={index}>pet: {item.name}</p>)} */}
         </div>
     )
 }
