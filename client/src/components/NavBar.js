@@ -10,7 +10,9 @@ import ChildFriendlyIcon from '@material-ui/icons/ChildFriendly';
 import StorefrontIcon from '@material-ui/icons/Storefront';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
 import EmojiPeopleIcon from '@material-ui/icons/EmojiPeople';
-import StatBar from './StatBar'
+import InventoryBar from './InventoryBar';
+import StatBar from './StatBar';
+import Context from '../context/context';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -22,12 +24,17 @@ const useStyles = makeStyles((theme) => ({
     title: {
     flexGrow: 1,
     },
+    icons: {
+        display:'inline-block'
+    }
 }));
 
 export default () => {
     const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
     const [anchor, setAnchor] = useState(null);
+
+    const context = React.useContext(Context);
 
     const classes = useStyles();
 
@@ -54,7 +61,7 @@ return (
 
             <Typography variant="h6" className={classes.title}>
                 {isAuthenticated? 
-                    'hello user'
+                    `Hello, ${context.clientSideUser.name}!`
                 :
                     'NeoGotchi'}
             </Typography>
@@ -92,7 +99,8 @@ return (
                             <ExitToAppIcon/>Log out
                         </MenuItem>
                     </Menu>
-                    <StatBar className={classes.root}/>
+                    {/* <InventoryBar className={classes.icons}/> */}
+                    <StatBar className={classes.icons}/>
                 </span>
             )
             :

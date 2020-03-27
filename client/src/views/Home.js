@@ -76,6 +76,10 @@ export default () => {
         })
     }
 
+    const setActivePet = (e, id) => {
+        dispatch()
+    }
+
     const inventoryPromise = axios.get('http://localhost:8000/api/neoGotchi/userOwned/'+userID)
         .then(res=>{
             // console.log('incventory promise res.data:',res.data)
@@ -100,12 +104,12 @@ export default () => {
                     // user: { position:{x:100,y:100}, name:'user', sprite:'user.png', renderer: <User />},
                 }}>
                     {JSON.stringify(state)}
-                <FeedBtn/>
-                <PlayBtn/>
-                <RestBtn/>
-                <WorkBtn/>
+                <FeedBtn neogotchi={state.activePet}/>
+                <PlayBtn neogotchi={state.activePet}/>          
+                <RestBtn neogotchi={state.activePet}/>
+                <WorkBtn neogotchi={state.activePet}/>
             </GameEngine>
-            {/* {state.ownedPets.map((item, index)=><p key={index}>pet: {item.name}</p>)} */}
+            {state.ownedPets.map((item, index)=><p key={index}>pet: {item.name}</p>)}
         </div>
     )
 }

@@ -1,6 +1,5 @@
 import React, { useContext } from 'react';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
-import MonetizationOnIcon from '@material-ui/icons/MonetizationOn';
 import Context from '../context/context'
 
 import { makeStyles } from '@material-ui/core/styles';
@@ -13,7 +12,7 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-export default function StatBar() {
+export default () => {
     const context = useContext(Context);
     const classes = useStyles();
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -48,9 +47,7 @@ export default function StatBar() {
             horizontal: 'center',
         }}
         >
-            <Typography className={classes.typography}>NeoCoins: {context.clientSideUser.gold} pcs</Typography>
-            {/* {context.clientSideUser.map} */}
-            <Typography className={classes.typography}>user's inventory</Typography>
+            <Typography className={classes.typography}>{context.clientSideUser.name}'s stuff <br/> more stuff <br/> ....</Typography>
         </Popover>
     </div>
     )
