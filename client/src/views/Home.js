@@ -95,6 +95,8 @@ export default () => {
         })
     return (
         <div>
+            {state.activePet.status!==undefined? <p>Active Pet: {state.activePet.name} 
+            <br/>Hunger: {state.activePet.status.hunger}<br/>Happiness: {state.activePet.status.happiness}</p> :<p>no active pet</p>}
             <GameEngine
                 style={{ width: 1000, height: 600, backgroundImage:BackgroundUrl, backgroundSize:"100%"}}
                 systems={[neoGotchiSystem]}
@@ -103,7 +105,7 @@ export default () => {
                     inventoryPromise
                     // user: { position:{x:100,y:100}, name:'user', sprite:'user.png', renderer: <User />},
                 }}>
-                    {JSON.stringify(state)}
+                    {/* {JSON.stringify(state)} */}
                 <FeedBtn neogotchi={state.activePet}/>
                 <PlayBtn neogotchi={state.activePet}/>          
                 <RestBtn neogotchi={state.activePet}/>

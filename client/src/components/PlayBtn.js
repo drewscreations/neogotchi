@@ -9,10 +9,10 @@ export default (props) => {
 
     const clickHandler = (e, id) => {
         e.preventDefault();
-        axios.put(`http://localhost:8000/api/neoGotchi/${id}/edit`, {status:{hunger:props.neogotchi.status.hunger-randomVal(15), happiness:props.neogotchi.status.happiness+randomVal(30)}})
+        axios.put(`http://localhost:8000/api/neoGotchi/${id}/edit`, {status:{hunger:Math.floor(props.neogotchi.status.hunger-randomVal(15)), happiness:Math.floor(props.neogotchi.status.happiness+randomVal(30))}})
             .then(res => console.log(res))
             .catch(err => console.log(err));
-        axios.put(`http://localhost:8000/api/neoGotchi/${id}/edit`, {exp: {dexterity: props.neogotchi.exp.dexterity+randomVal(20)}})
+        axios.put(`http://localhost:8000/api/neoGotchi/${id}/edit`, {exp: {dexterity: Math.floor(props.neogotchi.exp.dexterity+randomVal(20))}})
             .then(res => console.log(res))
             .catch(err => console.log(err));
     }
