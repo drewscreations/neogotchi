@@ -40,7 +40,7 @@ module.exports = {
         console.log('getting all users....')
         User.find()
             .then(msg => {
-                response.status(200).json({user:msg})
+                response.status(200).json({users:msg})
                 console.log('You got all users')
             })
             .catch(err => {

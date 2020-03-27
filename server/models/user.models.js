@@ -15,6 +15,9 @@ const UserSchema = new mongoose.Schema({
         required: [true, "please provide the gold count of the player"],
         default: 500
     },
+    inventory: {
+        
+    },
     exp: {
         petRaising: {
             type: Number, 
