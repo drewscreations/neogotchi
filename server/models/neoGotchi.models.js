@@ -50,6 +50,11 @@ const neoGotchiSchema = new mongoose.Schema({
         required: [true, 'stage is required!'],
         default: 'Egg',
         enum: ['Egg', 'Baby', 'Child', 'Adult'],//built in string validation
+    },
+    species: {
+        type: Number,
+        required: [true, 'species is required'],
+        default: 1
     }
     
 }, {toJSON:{virtuals:true}})

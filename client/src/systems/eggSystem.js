@@ -1,6 +1,3 @@
-import React, {useEffect} from 'react'
-import Egg from '../entities/Egg'
-
 const eggHandler = (entities, {input}) => {
     const {payload:onKeyDown} = input.find(x=>x.name === 'onKeyDown') || {};
     const {inventoryPromise} = entities

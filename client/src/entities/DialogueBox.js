@@ -8,13 +8,13 @@ const DialogueBox = (props) =>{
       //if main, props.position.main = "house, store, etc., otherwise, props.position(x, y)"
 
 
-      const {position, text, size, reqInput, linkTo, sprite} = props
+      const {position, text, size, reqInput, linkTo} = props
       const {height, width} = size;
       const x = position.x;
       const y = position.y;
       
       //ill move the import up one level to whatever view its in, then pass the imported pics as prop in the prop.sprite
-      const BackgroundUrl = `url(${userImg})`;
+      // const BackgroundUrl = `url(${userImg})`;
 
       return (
 

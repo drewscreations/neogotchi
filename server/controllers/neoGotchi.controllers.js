@@ -65,7 +65,7 @@ module.exports = {
     // Create
     createNeoGotchi: (request, response) => {
         console.log("create is fired!");
-        NeoGotchi.create({owner: 'hatchery', name:request.body.name})
+        NeoGotchi.create({owner: 'hatchery', name:request.body.name, species:Math.floor(Math.random()*5+1)})
             .then(msg => {
                 response.status(201).json(msg);
             })
@@ -86,13 +86,17 @@ module.exports = {
             .catch(err => response.status(404).json(err));
     },
     userOwnedNeoGotchi: (request, response) => {
-        // console.log("Find all data is fired!")
-        console.log('request body:',request.body)
+        console.log("Find user owned neogotchi is fired!")
         console.log('request.params:',request.params)
-        console.log('finding pets for:',request.params.owner)
         NeoGotchi.find({owner:request.params.id})
-            .then(msg => response.status(200).json({neogotchies: msg}))
-            .catch(err => response.status(404).json(err));
+            .then(msg => {
+                console.log('message',msg);
+                return response.status(200).json({neogotchies: msg})
+            })
+            .catch(err => {
+                console.log('error',err);
+                return response.status(404).json(err)
+            });
     },
     hatcheryOwnedNeoGotchi: (request, response) => {
         // console.log("Find all data is fired!")
@@ -125,7 +129,7 @@ module.exports = {
     // ====== CRUD for Items =====
     // Create
     createItem: (request, response) => {
-        console.log("create is fired!");
+        console.log("create item is fired!");
         Item.create({name:request.body.name, description:request.body.description, cost:request.body.cost, category:request.body.category})
             .then(msg => {
                 response.status(201).json(msg);
@@ -148,14 +152,14 @@ module.exports = {
     },
     // Update: update the target NeoGotchi
     updateItem: (request, response) => {
-        console.log("Update is fired!!");
+        console.log("Update item is fired!!");
         Item.findByIdAndUpdate({_id:request.params.id}, request.body, {runValidators: true})
             .then(msg => response.status(202).json(msg))
             .catch(err => response.status(304).json(err));
     },
     // Delete: delete target NeoGotchi
     deleteItem: (request, response) => {
-        console.log("Delete is fired!");
+        console.log("Delete item is fired!");
         Item.deleteOne({_id:request.params.id})
             .then(deleteConfirmation => response.status(200).json(deleteConfirmation))
             .catch(err => response.status(400).json(err));

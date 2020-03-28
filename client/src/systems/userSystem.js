@@ -8,7 +8,7 @@ const MoveUser  = (entities, { input })=>{
     const {payload:mouseDown} = input.find(x=>x.name === 'onMouseDown') || {};
     const {payload:mouseOut} = input.find(x=>x.name === 'onMouseOut') || {};
     
-    const {user, dialogueBox, house, shop, hatchery} = entities;//entities: position, target, name, sprite
+    const {user, house, shop, hatchery} = entities;//entities: position, target, name, sprite
     const {position, target} = user;
 
     

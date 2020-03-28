@@ -1,6 +1,3 @@
-import React, {useEffect} from 'react'
-import Egg from '../entities/Egg'
-
 const eggHandler = (entities, {input}) => {
     const {payload:onKeyDown} = input.find(x=>x.name === 'onKeyDown') || {};
     const {inventoryPromise} = entities
@@ -13,12 +10,23 @@ const eggHandler = (entities, {input}) => {
             
             }
         }
+    
     if (entities.inventoryPromise){
+        
         inventoryPromise.then(res=>{
-            res.map((item, index)=>entities[item.name]=item)
+            res.map((item, index)=>entities[item.name]=item);
+            // console.log(res)
+            if(Array.isArray(res) && res.length){
+                console.log('deleting that prommise')
+                delete entities.inventoryPromise
+            }
+            
         })
-        delete entities.inventoryPromise// only does this once hopefully
+        
     }
+    // const walkController = () =>{
+
+    // }
     for (const entity in entities) {
         // console.log(entity)
         if (entities[entity].neo===true){

@@ -1,8 +1,8 @@
-import React, {useEffect, useReducer, useContext} from 'react'
+import React, {useEffect, useReducer} from 'react'
 import {GameEngine} from 'react-game-engine';
 import HatcheryInside from '../static/img/hatchery_inside.png'
 import Egg from '../entities/Egg';
-import HomeBtn from '../components/HomeBtn';
+
 import eggSystem from '../systems/eggSystem'
 import axios from 'axios'
 
@@ -50,7 +50,15 @@ export default ()=> {
         .then(res=>{
             const eggEntities = [...res.data.neogotchies];
             const myObjectEntries = [];
-            eggEntities.map((item, index)=>myObjectEntries.push({position:{x:100+200*index,y:550}, egg:true, cost: 100*item.totalExp+100, id:item._id, name:item.name, sprite:'', renderer:<Egg/>}))
+            eggEntities.map((item, index)=>myObjectEntries.push({
+                position:{x:100+200*index,y:550},
+                egg:true,
+                species:item.species,
+                cost: 100*item.totalExp+100,
+                id:item._id,
+                name:item.name,
+                sprite:'',
+                renderer:<Egg/>}))
             return myObjectEntries
         })
     // const clickHandler = () =>{

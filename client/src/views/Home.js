@@ -1,8 +1,7 @@
 import React, {useReducer, useContext, useEffect} from 'react'
 import {GameEngine} from 'react-game-engine';
-import { Button } from '@material-ui/core';
+// import { Button } from '@material-ui/core';
 import HomeInside from '../static/img/house_inside.png'
-import User from '../entities/User';
 import myUser from '../context/context'
 import axios from 'axios'
 import neoGotchiSystem from '../systems/neoGotchiSystem'
@@ -12,8 +11,6 @@ import FeedBtn from '../components/FeedBtn';
 import PlayBtn from '../components/PlayBtn';
 import RestBtn from '../components/RestBtn';
 
-
-import MoveUser from '../systems/userSystem'
 
 const initialState = {
     userID:'test',
@@ -45,28 +42,28 @@ const reducer = (state, action) =>{
 export default () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const user = useContext(myUser);
-    console.log('user',user)
+    // console.log('user',user)
     const BackgroundUrl = `url(${HomeInside})`;
     const userID = user.clientSideUser._id;
-    console.log('userid',userID)
+    // console.log('userid',userID)
     useEffect(()=>{
         dispatch({type:'userID', payload:userID});
         dispatch({type:'loaded', payload:true})},[])
-    console.log('user id from state',state.userID)
+    // console.log('user id from state',state.userID)
     useEffect(()=>{
         if(state.loaded&&userID!==undefined){
         axios.get('http://localhost:8000/api/neoGotchi/userOwned/'+userID)
         .then(res=>{
-            console.log('successful axios response',res.data.neogotchies);
+            // console.log('successful axios response',res.data.neogotchies);
             dispatch({type:'ownedPets',payload:res.data.neogotchies});
-            console.log('state.owned pets is now',state.ownedPets)
+            // console.log('state.owned pets is now',state.ownedPets)
         })
         .then(
             dispatch({type:'loaded', payload:false})
         )
         
     }},[userID])
-    console.log(state)
+    // console.log(state)
 
     const clickHandler = (e, pet) => {
         console.log('pet has been clicked')
@@ -76,10 +73,6 @@ export default () => {
         })
     }
 
-    const setActivePet = (e, id) => {
-        dispatch()
-    }
-
     const inventoryPromise = axios.get('http://localhost:8000/api/neoGotchi/userOwned/'+userID)
         .then(res=>{
             // console.log('incventory promise res.data:',res.data)
@@ -87,9 +80,19 @@ export default () => {
             // console.log('eneo enitiesL:',neoEntities)
             const myObjectEntries = [];
             neoEntities.map((item, index)=>
-                myObjectEntries.push({position:{x:100+200*index,y:550}, neo:true, 
-                    direction:'left', active:false, wholePackage:item, id:item._id, 
-                    name:item.name, sprite:'', setActivePet:clickHandler, renderer:<NeoGotchi/>}))
+                myObjectEntries.push({
+                    position:{x:100+200*index,y:650},
+                    neo:true,
+                    direction:'left',
+                    action:'walkikng',
+                    active:false, 
+                    wholePackage:item,
+                    id:item._id,
+                    type:Math.floor(Math.random()*4+1), 
+                    name:item.name,
+                    sprite:'',
+                    setActivePet:clickHandler,
+                    renderer:<NeoGotchi/>}))
             console.log('myobject entries:',myObjectEntries)
             return myObjectEntries
         })

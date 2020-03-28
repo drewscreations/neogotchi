@@ -1,12 +1,12 @@
-import React, {useRef, useEffect} from 'react'
+import React from 'react'
 import {GameEngine} from 'react-game-engine';
 import Building from '../entities/Building';
-import User from '../entities/User';
-import DialogueBox from '../entities/DialogueBox'
-import Box from '../entities/Box'
-import MoveUser from '../systems/userSystem'
-import Matter from 'matter-js'
-import Physics from '../systems/Physics';
+// import User from '../entities/User';
+// import DialogueBox from '../entities/DialogueBox'
+// import Box from '../entities/Box'
+// import MoveUser from '../systems/userSystem'
+// import Matter from 'matter-js'
+// import Physics from '../systems/Physics';
 const namedBuildings={
     house:{x:200, y:200},
     shop:{x:400, y:300},

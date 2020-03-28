@@ -24,6 +24,9 @@ import neoAdult4 from '../static/img/pets/adult4.png'
 import neoAdult5 from '../static/img/pets/adult5.png'
 import myUser from '../context/context'
 import axios from 'axios'
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
 const NeoGotchi = (props) =>{
       const user = useContext(myUser);
       // console.log('user id',user.clientSideUser._id)
@@ -31,8 +34,8 @@ const NeoGotchi = (props) =>{
       //props.(position, name, sprite, renderer)
       //if main, props.position.main = "house, store, etc., otherwise, props.position(x, y)"
 
-      const size=100;
-      const {position, name, sprite} = props
+      const size=200;
+      const {position, name, sprite, wholePackage} = props
 
       const x = position.x - size/2;
       const y = position.y - size/2;
@@ -55,14 +58,49 @@ const NeoGotchi = (props) =>{
         props.setActivePet(e, props.wholePackage)
         
       }
+      const speciesDict = {
+            Egg:{
+                  sprite:{0:neoEgg1, 1:neoEgg2, 2:neoEgg3, 3:neoEgg4, 4:neoEgg5},
+                  size:100
+            },
+            Baby:{
+                  sprite:{0:neoBaby1, 1:neoBaby2, 2:neoBaby3, 3:neoBaby4, 4:neoBaby5},
+                  size:150
+            },
+            Child:{
+                  sprite:{0:neoChild1, 1:neoChild2, 2:neoChild3, 3:neoChild4, 4:neoChild5},
+                  size:200
+            },
+            Adult:{
+                  sprite:{0:neoAdult1, 1:neoAdult2, 2:neoAdult3, 3:neoAdult4, 4:neoAdult5},
+                  size:300
+            },
+      }
+      const neoPicker = (species, stage) =>{
+            // console.log('species',species,'stage',stage)
+            return {
+                  img:speciesDict[stage].sprite[species], 
+                  size:speciesDict[stage].size}
+      }
+      const currentNeo = neoPicker(wholePackage.species, wholePackage.stage);
+      // console.log(currentNeo)
       const divHolder = useRef(null)
-      const divStyle = { position: "absolute", width: size, height: size, left: x, top: y }
+      const divStyle = { position: "absolute", width: size, height: size, left: x, top: y-currentNeo.size }
       return (
 
             <div onClick={e=>clickHandler()}onMouseEnter={e=>mouseOverHandler(e)} onMouseLeave={e=>mouseLeaveHandler(e)} ref={divHolder} style={divStyle}>
-            <img src={neoChild5} alt={"logo"} width={size} height='auto' />
-            <div style={{color:'black'}}>Name: {props.name}</div>
-
+                  <img src={currentNeo.img} alt={"logo"} width={currentNeo.size} height='auto' />
+                  <div style={{color:'black'}}>Name: {props.name}</div>
+                  {navigateBtn?
+                        <Card variant="outlined">
+                              <CardContent>
+                                    <div>Name: {name}</div>
+                                    <div>Exp: {props.wholePackage.totalExp}</div>
+                                    <div>Hunger: {props.wholePackage.status.hunger}</div>
+                                    <div>Happyness: {props.wholePackage.status.happiness}</div>
+                              </CardContent>
+                        </Card>
+                  :null}
             </div>
 
       );

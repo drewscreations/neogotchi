@@ -16,7 +16,7 @@ const Building = (props) =>{
       //props.(position, name, sprite, renderer)
       //if main, props.position.main = "house, store, etc., otherwise, props.position(x, y)"
 
-      const {body, name, sprite} = props
+      const {body, name} = props
       const position = body.position;
       const size = Math.sqrt(body.area)
 
@@ -76,14 +76,11 @@ const Building = (props) =>{
       const linkTo = linkToDict[name]
 
       return (
-            <a>
                   <div onMouseEnter={e=>mouseOverHandler(e)} onMouseLeave={e=>mouseLeaveHandler(e)}  style={divStyle}>
                         <img src={imageSrcDict[name].closed} style={{height:'100%', width:'100%', objectFit: 'contain'}} alt={"logo"} ref={picHolder} />
                         <div style={{color:'black'}}>{props.name}</div>
                         {navigateBtn?<Link to={linkTo} style={{textDecoration:'none'}}> <Button style={{color:'white', background:'skyblue'}}>GO!</Button> </Link>:null}
                   </div>
-            </a>
-
       );
 }
 export default Building;
