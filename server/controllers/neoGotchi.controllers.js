@@ -106,10 +106,11 @@ module.exports = {
     },
     // Update: update the target NeoGotchi
     updateNeoGotchi: (request, response) => {
-        console.log("Update is fired!!");
-        console.log(request.params)
+        console.log("Update neogotchi is fired!!");
+        console.log('request params:',request.params);
+        console.log('request body:', request.body)
         NeoGotchi.findByIdAndUpdate({_id:request.params.id}, request.body, {runValidators: true})
-            .then(msg => response.status(202).json(msg))
+            .then(msg => response.status(202).json({neogotchi:msg}))
             .catch(err => response.status(304).json(err));
     },
     // Delete: delete target NeoGotchi

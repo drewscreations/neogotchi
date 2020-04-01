@@ -5,11 +5,8 @@ import HomeInside from '../static/img/house_inside.png'
 import myUser from '../context/context'
 import axios from 'axios'
 import neoGotchiSystem from '../systems/neoGotchiSystem'
+import interactionButtonSystem from '../systems/interactionButtonsSystem'
 import NeoGotchi from '../entities/neoGotchi'
-import WorkBtn from '../components/WorkBtn';
-import FeedBtn from '../components/FeedBtn';
-import PlayBtn from '../components/PlayBtn';
-import RestBtn from '../components/RestBtn';
 
 
 const initialState = {
@@ -39,6 +36,7 @@ const reducer = (state, action) =>{
     }  
 
 }
+
 export default () => {
     const [state, dispatch] = useReducer(reducer, initialState);
     const user = useContext(myUser);
@@ -66,7 +64,7 @@ export default () => {
     // console.log(state)
 
     const clickHandler = (e, pet) => {
-        console.log('pet has been clicked')
+        // console.log('pet has been clicked')
         dispatch({
             type:'activePet',
             payload:{...pet}
@@ -91,9 +89,9 @@ export default () => {
                     type:Math.floor(Math.random()*4+1), 
                     name:item.name,
                     sprite:'',
-                    setActivePet:clickHandler,
+                    setActivePetRoot:clickHandler,
                     renderer:<NeoGotchi/>}))
-            console.log('myobject entries:',myObjectEntries)
+            // console.log('myobject entries:',myObjectEntries)
             return myObjectEntries
         })
     return (
@@ -102,17 +100,18 @@ export default () => {
             <br/>Hunger: {state.activePet.status.hunger}<br/>Happiness: {state.activePet.status.happiness}</p> :<p>no active pet</p>}
             <GameEngine
                 style={{ width: 1000, height: 600, backgroundImage:BackgroundUrl, backgroundSize:"100%"}}
-                systems={[neoGotchiSystem]}
+                systems={[neoGotchiSystem, interactionButtonSystem]}
                 entities={
                 {
-                    inventoryPromise
+                    inventoryPromise,
+                    settup:true,
                     // user: { position:{x:100,y:100}, name:'user', sprite:'user.png', renderer: <User />},
                 }}>
                     {/* {JSON.stringify(state)} */}
-                <FeedBtn neogotchi={state.activePet}/>
+                {/* <FeedBtn neogotchi={state.activePet}/>
                 <PlayBtn neogotchi={state.activePet}/>          
                 <RestBtn neogotchi={state.activePet}/>
-                <WorkBtn neogotchi={state.activePet}/>
+                <WorkBtn neogotchi={state.activePet}/> */}
             </GameEngine>
             {/* {state.ownedPets.map((item, index)=><p key={index}>pet: {item.name}</p>)} */}
         </div>

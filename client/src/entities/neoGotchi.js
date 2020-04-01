@@ -52,10 +52,11 @@ const NeoGotchi = (props) =>{
             divHolder.current.style.border = '1px dotted blue';
       }
     const clickHandler= (e)=>{
-        console.log('clicked in neogotchi!')
+      //   console.log('clicked in neogotchi!')
         divHolder.current.focus();
-        console.log(divHolder.current);
-        props.setActivePet(e, props.wholePackage)
+      //   console.log(divHolder.current);
+        props.setActivePetRoot(e, props.wholePackage);
+        props.setActivePet(e, props.wholePackage);
         
       }
       const speciesDict = {
