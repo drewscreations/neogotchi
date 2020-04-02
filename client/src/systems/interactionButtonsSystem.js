@@ -47,7 +47,7 @@ const goldDict={//need user ID
     }
 }
 const randomVal = (num) => {
-    return Math.random()*num
+    return Math.floor(Math.random()*num)
 }
 const buttonDict = { //buttonType:buttonText
     feed:"feed",
@@ -57,32 +57,24 @@ const buttonDict = { //buttonType:buttonText
 }
 
 const buttonSystem = (entities, {input}) => {
-    // const {payload:onKeyDown} = input.find(x=>x.name === 'onKeyDown') || {};
-    // const {activePet} = entities;
-    // console.log('button enetities',entities.activePet)
-    // console.log('butons active pet:',activePet._id)
-    const clickHandler = (e, buttonType) => {//********need neogotchi not just ID*************
-        // console.log('button system active pet',activePet)
-        // const id = entities.activePet._id//make active neo
-        // console.log('button id',id)
+    const clickHandler = (e, buttonType) => {
         // e.preventDefault();
         const expVals = expDict[buttonType] //button type must be feed, play rest work
-        for (const action in expVals) {
-            const neogotchi = entities.activePet;
-            for (const stat in expVals[action].status){
-                expVals[action].status[stat] = neogotchi.status[stat] + randomVal(expDict[buttonType].status[stat])
-            };
-            for (const stat in expVals[action].exp){
-                expVals[action].exp[stat] = neogotchi.exp[stat] + randomVal(expDict[buttonType].exp[stat])
+        const neogotchi = entities.activePet;
+        const expSend = {};
+        for (const action in expVals) {//using for loop because I dont know if just status, exp, or both are affected
+            for (const stat in expVals[action]){//made expsend with strings as keys because thats how mongoose wants it?
+                expSend[`${action}.${stat}`] = neogotchi[action][stat]+randomVal(expVals[action][stat])
             }
         }
         console.log('exp vals',expVals)
-        axios.put(`http://localhost:8000/api/neoGotchi/${entities.activePet._id}/edit`, {'exp.strength':'2000', 'status.hunger':'5'})
+        console.log('neo vals',neogotchi.status, neogotchi.exp)
+        axios.put(`http://localhost:8000/api/neoGotchi/${entities.activePet._id}/edit`, {...expSend})
         .then(res => {
             console.log('res data neo',res.data.neogotchi);
             entities[entities.activePet.name].wholePackage=res.data.neogotchi;
         })//neogotchi.wholePackage = res
-        .catch(err => console.log(err));
+        .catch(err => console.log('error with axios put',err));
     }
     if(entities && entities.settup === true){
         console.log('setting up buttons')
@@ -123,19 +115,6 @@ const buttonSystem = (entities, {input}) => {
             settup:false 
         }           
     }
-    // for (const entity in entities) {
-    //     // console.log(entity)
-    //     if (entities[entity].button===true){// if the entity is a button (button key is true)
-    //         const button = entities[entity];//call it button locally
-    //         // console.log('its true')
-    //         //button.action
-    //         //button entitiy parameters: on click, text (feed, play, work)
-    //         //on click needs target, sends exp and inventory update and returns updated neogotchi
-    //         //exp calculated from item used, aciton type, user pet raising exp?
-
-            
-    //     }
-    // };
 
     
     return entities
