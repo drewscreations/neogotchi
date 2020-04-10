@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 import InteractionButton from '../entities/InteractionButton';
+import DialogueBox from '../entities/DialogueBox';
+
 
 const expDict={
     feed:{
@@ -60,24 +62,31 @@ const buttonSystem = (entities, {input}) => {
     const clickHandler = (e, buttonType) => {
         // e.preventDefault();
         const expVals = expDict[buttonType] //button type must be feed, play rest work
-        const neogotchi = entities.activePet;
-        const expSend = {};
-        for (const action in expVals) {//using for loop because I dont know if just status, exp, or both are affected
-            for (const stat in expVals[action]){//made expsend with strings as keys because thats how mongoose wants it?
-                expSend[`${action}.${stat}`] = neogotchi[action][stat]+randomVal(expVals[action][stat])
+        if(entities.activePet!==undefined){
+            const neogotchi = entities.activePet;
+            const expSend = {};
+            for (const action in expVals) {//using for loop because I dont know if just status, exp, or both are affected
+                for (const stat in expVals[action]){//made expsend with strings as keys because thats how mongoose wants it?
+                    console.log(`${stat}: ${neogotchi[action][stat]}`)
+                    expSend[`${action}.${stat}`] = neogotchi[action][stat]+randomVal(expVals[action][stat])
+                }
             }
+
+            console.log('neo vals',neogotchi.status, neogotchi.exp)
+            console.log(expSend)
+            axios.put(`http://localhost:8000/api/neoGotchi/${entities.activePet._id}/edit`, {...expSend})
+            .then(res => {
+                console.log('res data neo',res.data.neogotchi);
+                entities.activePet=res.data.neogotchi;
+                entities.activePet.switch = true;
+                
+            })//neogotchi.wholePackage = res
+            .catch(err => console.log('omg there was an error with axios put',err));
         }
-        console.log('exp vals',expVals)
-        console.log('neo vals',neogotchi.status, neogotchi.exp)
-        axios.put(`http://localhost:8000/api/neoGotchi/${entities.activePet._id}/edit`, {...expSend})
-        .then(res => {
-            console.log('res data neo',res.data.neogotchi);
-            entities[entities.activePet.name].wholePackage=res.data.neogotchi;
-        })//neogotchi.wholePackage = res
-        .catch(err => console.log('error with axios put',err));
+        
     }
     if(entities && entities.settup === true){
-        console.log('setting up buttons')
+        console.log('setting up buttons and text area')
         entities = {
             ...entities, //can do these button settups in a loop
             feedBtn:{
@@ -112,6 +121,18 @@ const buttonSystem = (entities, {input}) => {
                 position:4,
                 renderer:<InteractionButton/>
                 },
+            activePetHolder:{
+                    text:'no pet selected yet!',
+                    position:{
+                        x:100,
+                        y:100,
+                    },
+                    size:{
+                        height:100,
+                        width:300
+                    },
+                    renderer:<DialogueBox/>
+                    },
             settup:false 
         }           
     }

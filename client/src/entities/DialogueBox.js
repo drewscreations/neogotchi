@@ -18,10 +18,11 @@ const DialogueBox = (props) =>{
 
       return (
 
-            <div style={{ position: "absolute", width: width, height: height, backgroundColor:'purple', left: x, top: y }}>
+            <div style={{ position: "absolute", width: width, height: height, backgroundColor:'grey', left: x, top: y }}>
             {/* <img src={Store} alt={"logo"}/> */}
             <div style={{color:'black'}}>{props.name}</div>
-            {text}
+            Press 'd' to switch pets
+            <p>{text}</p>
             {reqInput? <Link to={linkTo} style={{textDecoration:'none'}}> <Button style={{color:'white', background:'skyblue'}}>GO!</Button> </Link>:'...'}
             </div>
 
